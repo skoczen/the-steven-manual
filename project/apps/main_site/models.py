@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Emotion(models.Model):
     name = models.CharField(max_length=200)
-    cause = models.TextField(blank=True, null=True)
+    cause = models.TextField(blank=True, null=True, verbose_name="Causes")
     symptoms = models.TextField(blank=True, null=True)
     helpful = models.TextField(blank=True, null=True)
     updated_at = models.DateField(auto_now=True)

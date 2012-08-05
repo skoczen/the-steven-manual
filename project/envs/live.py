@@ -15,3 +15,6 @@ COMPRESS_STORAGE = STATICFILES_STORAGE
 
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
+
+import dj_database_url
+DATABASES['default'].update(dj_database_url.config())
