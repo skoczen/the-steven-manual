@@ -42,10 +42,10 @@ class GutterBumper(models.Model):
     off = models.BooleanField(default=False)
     worked_out = models.BooleanField(default=False)
     mediated = models.BooleanField(default=False)
-    number_of_beers = models.IntegerField(default=False)
-    presence = models.IntegerField(default=False, help_text="1-10")
-    happiness = models.IntegerField(default=False, help_text="1-10")
-    creativity = models.IntegerField(default=False, help_text="1-10")
-    morning_mood = models.IntegerField(default=False, help_text="1-10")
+    number_of_beers = models.IntegerField(blank=True, null=True)
+    presence = models.IntegerField(blank=True, null=True, help_text="1-10")
+    happiness = models.IntegerField(blank=True, null=True, help_text="1-10")
+    creativity = models.IntegerField(blank=True, null=True, help_text="1-10")
+    morning_mood = models.IntegerField(blank=True, null=True, help_text="1-10")
     
     
