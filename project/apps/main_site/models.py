@@ -28,3 +28,22 @@ class Value(models.Model):
 
     def __unicode__(self):
         return "%s" % self.name
+
+
+class GutterBumpers(models.Model):
+    date = models.DateField(auto_now_add=True)
+    sleep_hrs = models.IntegerField(blank=True, null=True)
+    work_hrs = models.IntegerField(blank=True, null=True)
+    alone_hrs = models.IntegerField(blank=True, null=True)
+    friend_hrs = models.IntegerField(blank=True, null=True)
+    relationship_hrs = models.IntegerField(blank=True, null=True)
+
+    off = models.BooleanField(default=False)
+    worked_out = models.BooleanField(default=False)
+    mediated = models.BooleanField(default=False)
+    number_of_beers = models.IntegerField(default=False)
+    presence = models.IntegerField(default=False, help_text="1-10")
+    happiness = models.IntegerField(default=False, help_text="1-10")
+    morning_mood = models.IntegerField(default=False, help_text="1-10")
+    
+    
