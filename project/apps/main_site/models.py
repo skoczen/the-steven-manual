@@ -30,7 +30,7 @@ class Value(models.Model):
         return "%s" % self.name
 
 
-class GutterBumpers(models.Model):
+class GutterBumper(models.Model):
     date = models.DateField(auto_now_add=True)
     sleep_hrs = models.IntegerField(blank=True, null=True)
     work_hrs = models.IntegerField(blank=True, null=True)
@@ -44,6 +44,7 @@ class GutterBumpers(models.Model):
     number_of_beers = models.IntegerField(default=False)
     presence = models.IntegerField(default=False, help_text="1-10")
     happiness = models.IntegerField(default=False, help_text="1-10")
+    creativity = models.IntegerField(default=False, help_text="1-10")
     morning_mood = models.IntegerField(default=False, help_text="1-10")
     
     
