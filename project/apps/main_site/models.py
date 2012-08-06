@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class Emotion(models.Model):
@@ -31,7 +32,7 @@ class Value(models.Model):
 
 
 class GutterBumper(models.Model):
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(default=datetime.date.today())
     sleep_hrs = models.IntegerField(blank=True, null=True)
     work_hrs = models.IntegerField(blank=True, null=True)
     alone_hrs = models.IntegerField(blank=True, null=True)
