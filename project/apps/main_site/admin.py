@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main_site.models import Emotion, EmotionEvent, Value
+from main_site.models import Emotion, EmotionEvent, Value, GutterBumper
     
 
 # class ArtworkOptions(admin.ModelAdmin):
@@ -21,3 +21,4 @@ from main_site.models import Emotion, EmotionEvent, Value
 admin.site.register(Emotion)
 admin.site.register(EmotionEvent)
 admin.site.register(Value)
+admin.site.register(GutterBumper)
