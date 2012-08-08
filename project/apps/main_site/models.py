@@ -47,6 +47,7 @@ class GutterBumper(models.Model):
     happiness = models.IntegerField(blank=True, null=True, help_text="1-10")
     creativity = models.IntegerField(blank=True, null=True, help_text="1-10")
     morning_mood = models.IntegerField(blank=True, null=True, help_text="1-10")
+    notes = models.TextField(blank=True, null=True)
     
     def __unicode__(self):
         return "%s" % self.date
