@@ -49,6 +49,10 @@ class GutterBumper(models.Model):
     morning_mood = models.IntegerField(blank=True, null=True, help_text="1-10")
     notes = models.TextField(blank=True, null=True)
     
+    @property
+    def saw_friend(self):
+        return self.friend_hrs > 0
+
     def __unicode__(self):
         return "%s" % self.date
     
