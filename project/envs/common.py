@@ -16,6 +16,8 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+SERVER_EMAIL = 'skoczen@gmail.com'
+DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
 DATABASES = {
     'default': {
