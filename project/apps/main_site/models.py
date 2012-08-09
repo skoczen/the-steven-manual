@@ -37,6 +37,7 @@ class GutterBumper(models.Model):
     work_hrs = models.FloatField(default=0, blank=True, null=True)
     alone_hrs = models.FloatField(default=0, blank=True, null=True)
     friend_hrs = models.FloatField(default=0, blank=True, null=True)
+    public_hrs = models.FloatField(default=0, blank=True, null=True, help_text="Not specifically hanging with people, but in a larger crowd")
     relationship_hrs = models.FloatField(default=0, blank=True, null=True)
 
     off = models.BooleanField(default=False)
