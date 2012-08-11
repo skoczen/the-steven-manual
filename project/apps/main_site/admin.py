@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main_site.models import Emotion, EmotionEvent, Value, GutterBumper
+from main_site.models import Emotion, Value, GutterBumper
     
 
 class GutterBumperOptions(admin.ModelAdmin):
@@ -10,6 +10,5 @@ class GutterBumperOptions(admin.ModelAdmin):
     
 
 admin.site.register(Emotion)
-admin.site.register(EmotionEvent)
 admin.site.register(Value)
 admin.site.register(GutterBumper, GutterBumperOptions)
