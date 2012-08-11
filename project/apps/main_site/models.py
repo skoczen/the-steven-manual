@@ -53,6 +53,8 @@ class GutterBumper(models.Model):
 
 class WeeklyMeal(models.Model):
     name = models.CharField(max_length=200)
+    ingredients = models.TextField(blank=True, null=True)
+    preparation = models.TextField(blank=True, null=True)
     how_it_went = models.TextField(blank=True, null=True)
     week_start_date = models.DateField(blank=True, null=True)
     updated_at = models.DateField(auto_now=True)
