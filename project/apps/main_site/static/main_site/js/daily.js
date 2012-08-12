@@ -44,7 +44,8 @@ function hoursChanged(e) {
 function calculateHours(hoursBlock) {
 	var hours = 0;
 	$("input", hoursBlock).each(function(){
-		hours += parseInt($(this).val(),10);
+		hours += parseFloat($(this).val(),10);
 	});
+	hours = Math.round(hours);
 	$(".total", hoursBlock).html(hours);	
 }
