@@ -24,7 +24,7 @@ class Value(models.Model):
 
 class GutterBumper(models.Model):
     date = models.DateField(default=datetime.date.today())
-    sleep_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Sleep")
+    sleep_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Sleep", help_text="Sleep this morning")
     work_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Work")
     alone_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Alone")
     friend_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Friend")
