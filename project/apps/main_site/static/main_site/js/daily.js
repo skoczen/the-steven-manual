@@ -2,7 +2,7 @@
 var formSaveTimeout;
 var saveFadeoutTimeout;
 $(function(){
-	$("input").change(queueFormSave)
+	$("input, textarea").change(queueFormSave)
 	$(".hours input").change(hoursChanged)
 	$('form').ajaxForm({
 		success: saveSuccess,
