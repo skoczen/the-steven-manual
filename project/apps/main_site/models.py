@@ -33,7 +33,8 @@ class GutterBumper(models.Model):
 
     off = models.BooleanField(default=False)
     worked_out = models.BooleanField(default=False)
-    mediated = models.BooleanField(default=False)
+    mediated = models.BooleanField(default=False, verbose_name="meditated")
+    left_the_house = models.BooleanField(default=False)
     number_of_beers = models.IntegerField(blank=True, null=True, verbose_name="# of beers")
     presence = models.IntegerField(blank=True, null=True, help_text="1-10")
     happiness = models.IntegerField(blank=True, null=True, help_text="1-10")

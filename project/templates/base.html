@@ -15,8 +15,8 @@
   {% analytical_head_top %}
 
   {% block css %}
-  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
   {% compress css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}base/css/bootstrap.css">
   <link rel="stylesheet" href="{{STATIC_URL}}base/css/animate.css">
   <link rel="stylesheet" href="{{STATIC_URL}}base/css/style.css">
   {% endcompress %}
@@ -38,12 +38,13 @@
   </div> 
 
   {% compress js %}
-	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/jquery-1.6.2.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/underscore-min.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/backbone-min.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/ICanHaz.min.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/Three.js"></script>
 	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/easel.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}base/js/libs/bootstrap.js"></script>
   {% endcompress %}
   {% block js %}
 

@@ -1,0 +1,28 @@
+from django.forms import ModelForm, ModelChoiceField, CharField, Form, CheckboxSelectMultiple, ModelMultipleChoiceField
+from main_site.models import Emotion, Value, GutterBumper, WeeklyMeal
+
+class EmotionForm(ModelForm):
+    class Meta:
+        model = Emotion
+        fields = ("name", "one_liner", "cause", "symptoms", "helpful")
+
+
+class ValueForm(ModelForm):
+    class Meta:
+        model = Value
+        fields = ("name", "explanation")
+
+class GutterBumperForm(ModelForm):
+    emotions = ModelMultipleChoiceField(queryset=Emotion.objects.all(), widget=CheckboxSelectMultiple(), required=False)
+
+    class Meta:
+        model = GutterBumper
+        fields = ("date", "sleep_hrs", "work_hrs", "alone_hrs", "friend_hrs", "public_hrs", "relationship_hrs"
+, "off", "worked_out", "mediated", "left_the_house", "number_of_beers", "presence", "happiness", "creativity", "morning_mood", "notes"
+    , "emotions")
+
+
+class WeeklyMealForm(ModelForm):
+    class Meta:
+        model = WeeklyMeal
+        fields = ("ingredients", "preparation", "how_it_went", "week_start_date",)

@@ -6,7 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'', include('main_site.urls'), name="main_site"),
+    url(r'', include('main_site.urls', namespace="main_site"), ),
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^fonts/(?P<path>.*)$', 'django.views.static.serve', {

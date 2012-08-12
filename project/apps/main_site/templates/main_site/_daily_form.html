@@ -1,0 +1,52 @@
+<form class="daily_form form-horizontal" action="{% url main_site:update_bumpers form.instance.pk %}" method="POST" >
+	{% csrf_token %}
+	<span class="hidden">
+		{{form.id}}
+		{{form.date}}
+	</span>
+	<div class="section date header">{{form.instance.date|date:"l, F j, Y"}}</div>
+	<div class="section hours">
+		<table>
+			<tr>
+				<td class="total"></td>
+				<td class="sleep">{{form.sleep_hrs}}<br>Sleep</td>
+				<td class="work">{{form.work_hrs}}<br>Work</td>
+    			<td class="alone">{{form.alone_hrs}}<br>Alone</td>
+    			<td class="friend">{{form.friend_hrs}}<br>Friend</td>
+    			<td class="public">{{form.public_hrs}}<br>Public</td>
+    			<td class="relationship">{{form.relationship_hrs}}<br>Relationship</td>
+    		</tr>
+    	</table>
+    </div>
+    <div class="section checkboxes">
+    	<table>
+			<tr>
+    			<td class="mediated">{{form.mediated}}<br>Mediated</td>
+    			<td class="off">{{form.off}}<br>Off</td>
+    			<td class="worked_out">{{form.worked_out}}<br>Worked out</td>
+    			<td class="left_the_house">{{form.left_the_house}}<br>Left the house</td>
+    		</tr>
+    	</table>
+    </div>
+    <div class="section notes">
+    	<label>Daily Notes:</label>
+		{{form.notes}}
+	</div>
+    <div class="section num_beers">
+    	<label for="id_number_of_beers">Num beers:</label>{{form.number_of_beers}}
+    </div>
+    <div class="section subjective">
+    	<label for="id_{{form.presence.html_name}}">{{form.presence.label}}</label><input type="range" value="{{form.instance.presence}}" min="1" max="10" id="id_{{form.presence.html_name}}" name="{{form.presence.html_name}}"/>
+
+    	<label for="id_{{form.happiness.html_name}}">{{form.happiness.label}}</label><input type="range" value="{{form.instance.happiness}}" min="1" max="10" id="id_{{form.happiness.html_name}}" name="{{form.happiness.html_name}}"/>
+
+    	<label for="id_{{form.creativity.html_name}}">{{form.creativity.label}}</label><input type="range" value="{{form.instance.creativity}}" min="1" max="10" id="id_{{form.creativity.html_name}}" name="{{form.creativity.html_name}}"/>
+
+    	<label for="id_{{form.morning_mood.html_name}}">{{form.morning_mood.label}}</label><input type="range" value="{{form.instance.morning_mood}}" min="1" max="10" id="id_{{form.morning_mood.html_name}}" name="{{form.morning_mood.html_name}}"/>
+    </div>
+    
+	<div class="section emotions">
+		<label>Emotions:</label>
+		{{form.emotions}}
+	</div>
+</form>
