@@ -23,11 +23,13 @@ class Emotion(BaseModel):
     helpful = models.TextField(blank=True, null=True)
     
 class Value(BaseModel):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, verbose_name='Story name')
     explanation = models.TextField(blank=True, null=True)
 
 class GutterBumper(BaseModel):
     date = models.DateField(default=datetime.date.today())
+    woke_up_at = models.TimeField(default=datetime.date.today())
+    fell_asleep_at = models.TimeField(default=datetime.date.today())
     sleep_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Sleep", help_text="Sleep this morning")
     work_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Work")
     alone_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Alone")
@@ -39,6 +41,7 @@ class GutterBumper(BaseModel):
     worked_out = models.BooleanField(default=False)
     mediated = models.BooleanField(default=False, verbose_name="meditated")
     left_the_house = models.BooleanField(default=False)
+    inbox_zero = models.BooleanField(default=False)
     travelling_or_out_of_routine = models.BooleanField(default=False, verbose_name="Travelling/Nonroutine")
     number_of_beers = models.IntegerField(blank=True, null=True, verbose_name="# of beers")
     presence = models.IntegerField(blank=True, null=True, help_text="1-10")
@@ -56,6 +59,44 @@ class GutterBumper(BaseModel):
     def __unicode__(self):
         return "%s" % self.date
     
+    @property
+    def yesterday(self):
+        try:
+            return GutterBumper.objects.get(date=self.date - datetime.timedelta(days=1))
+        except:
+            return None
+
+    @property
+    def tomorrow(self):
+        try:
+            return GutterBumper.objects.get(date=self.date + datetime.timedelta(days=1))
+        except:
+            return None
+    @property
+    def calculated_sleep_hrs(self):
+        if self.woke_up_at and self.yesterday.fell_asleep_at:
+            today_hrs, today_min, _ = ("%s" % self.woke_up_at).split(":")
+            yester_hrs, yester_min, _ = ("%s" % self.yesterday.fell_asleep_at).split(":")
+            today = float(today_hrs) + (float(today_min)/60)
+            yester = float(yester_hrs) + (float(yester_min)/60)
+            if yester > 12:
+                # different date
+                return round((today+24) - yester,1)
+            else:
+                # same date
+                return round(today - yester,1)
+        return None
+
+    def save(self, *args, **kwargs):
+        old_fell_asleep_time = GutterBumper.objects.get(pk=self.pk).fell_asleep_at
+        
+        if self.calculated_sleep_hrs:
+            self.sleep_hrs = self.calculated_sleep_hrs
+
+        super(GutterBumper, self).save(*args, **kwargs)
+        if old_fell_asleep_time != self.fell_asleep_at and self.tomorrow:
+            self.tomorrow.save()
+
 
 class WeeklyMeal(BaseModel):
     name = models.CharField(max_length=200)

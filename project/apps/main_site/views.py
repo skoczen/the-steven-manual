@@ -3,6 +3,18 @@ from annoying.decorators import render_to, ajax_request
 from main_site.models import GutterBumper
 from main_site.forms import GutterBumperForm
 
+def turn_friendly_time_into_python_time(time_with_ampm):
+    time = time_with_ampm[:5]
+    ampm = time_with_ampm[5:]
+    hour, minute = time.split(":")
+    hour = int(hour)
+    minute = int(minute)
+    if ampm.lower() == "pm":
+        hour += 12
+    if hour == 24:
+        hour = 0
+    timestr = "%02d:%02d:00" % (hour, minute)
+    return timestr
 
 @render_to("main_site/home.html")
 def home(request):
@@ -27,17 +39,27 @@ def daily(request):
 @ajax_request
 def update_bumpers(request, bumper_pk):
     success = False
-    print request.POST
+
     try:
+        data = request.POST.copy()
+        data["woke_up_at"] = turn_friendly_time_into_python_time(data["woke_up_at"])
+        data["fell_asleep_at"] = turn_friendly_time_into_python_time(data["fell_asleep_at"])
         bumper = GutterBumper.objects.get(pk=bumper_pk)
-        form = GutterBumperForm(request.POST, instance=bumper)
+        form = GutterBumperForm(data, instance=bumper)
         if form.is_valid():
             form.save()
             success=True
         else:
             print form.errors
     except:
-        from traceback import print_tb
-        print_tb()
+        from traceback import print_exc
+        print print_exc()
         pass
-    return {"success":success}
+    bumper = GutterBumper.objects.get(pk=bumper_pk)
+    return {"success":success, "sleep_hrs": bumper.sleep_hrs, "id": bumper_pk}
+
+
+@ajax_request
+def get_sleep_hrs(request, bumper_pk):
+    bumper = GutterBumper.objects.get(pk=bumper_pk)
+    return {"success":True, "sleep_hrs": bumper.sleep_hrs, "id": bumper_pk}
