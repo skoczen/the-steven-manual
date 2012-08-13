@@ -28,8 +28,8 @@ class Value(BaseModel):
 
 class GutterBumper(BaseModel):
     date = models.DateField(default=datetime.date.today())
-    woke_up_at = models.TimeField(default=datetime.date.today())
-    fell_asleep_at = models.TimeField(default=datetime.date.today())
+    woke_up_at = models.TimeField(default=datetime.time(7,45))
+    fell_asleep_at = models.TimeField(default=datetime.time(23,30))
     sleep_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Sleep", help_text="Sleep this morning")
     work_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Work")
     alone_hrs = models.FloatField(default=0, blank=True, null=True, verbose_name="Alone")
@@ -88,13 +88,16 @@ class GutterBumper(BaseModel):
         return None
 
     def save(self, *args, **kwargs):
-        old_fell_asleep_time = GutterBumper.objects.get(pk=self.pk).fell_asleep_at
+        try:
+            old_fell_asleep_time = GutterBumper.objects.get(pk=self.pk).fell_asleep_at
+        except:
+            old_fell_asleep_time = None
         
         if self.calculated_sleep_hrs:
             self.sleep_hrs = self.calculated_sleep_hrs
 
         super(GutterBumper, self).save(*args, **kwargs)
-        if old_fell_asleep_time != self.fell_asleep_at and self.tomorrow:
+        if old_fell_asleep_time and old_fell_asleep_time != self.fell_asleep_at and self.tomorrow:
             self.tomorrow.save()
 
 
