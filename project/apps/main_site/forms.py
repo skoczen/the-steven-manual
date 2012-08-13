@@ -17,7 +17,7 @@ class GutterBumperForm(ModelForm):
 
     class Meta:
         model = GutterBumper
-        fields = ("date", "sleep_hrs", "work_hrs", "alone_hrs", "friend_hrs", "public_hrs", "relationship_hrs"
+        fields = ("date", "woke_up_at", "fell_asleep_at", "sleep_hrs", "work_hrs", "alone_hrs", "friend_hrs", "public_hrs", "relationship_hrs"
 , "off", "worked_out", "mediated", "left_the_house", "number_of_beers", "presence", "happiness", "creativity", "morning_mood", "notes"
     , "emotions")
 

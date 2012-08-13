@@ -47,6 +47,11 @@ form table td, form table  input {
 	font-size: 20px;
 	color: #555;
 }
+.hours .sleep .number {
+	padding: 7px 0px 4px 0px;
+	font-size: 13px;
+	color: #555;
+}
 form .section {
 	padding: 10px 0px;
 	
@@ -54,4 +59,10 @@ form .section {
 .section.notes {
 
 	float: right;
+}
+.timeEntry_control {
+	display: none;
+}
+form .sleep_field input {
+	width: 60px;
 }
