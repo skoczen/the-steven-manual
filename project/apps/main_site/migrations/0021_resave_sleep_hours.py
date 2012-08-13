@@ -14,7 +14,7 @@ class Migration(DataMigration):
                 gb.fell_asleep_at = "00:00:00"
                 hr_fract, hrs = modf(gb.sleep_hrs)
                 mins = round(hr_fract * 60)
-                gb.woke_up_at = "%02d:%02d:00" % (hrs, mins,)
+                gb.woke_up_at = datetime.time(hrs, mins)
                 gb.save()
 
     def backwards(self, orm):
