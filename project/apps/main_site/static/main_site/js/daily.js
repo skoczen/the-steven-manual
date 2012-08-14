@@ -67,12 +67,29 @@ function hoursChanged(e) {
 	$hours = $ele.parents(".hours");
 	calculateHours($hours);
 }
+function roundNumberWithDec(num, dec) {
+	return Math.round( Math.round( num * Math.pow( 10, dec + 1 ) ) / Math.pow( 10, 1 ) ) / Math.pow(10,dec);
+}
+function roundPretty(num) {
+	var roundLen = 1;
+	var rem = (num % 1) * 100;
+	if (rem == 25 || rem == 75) {
+		roundLen = 2;
+	}
+	if (rem == 0) {
+		roundLen = 0;
+	}
+	console.log(num)
+	console.log(roundLen)
+	console.log(Math.round(num,roundLen))
+	return roundNumberWithDec(num,roundLen)
+}
 function calculateHours(hoursBlock) {
 	var hours = 0;
 	$(".day_hours input", hoursBlock).each(function(){
 		hours += parseFloat($(this).val(),10);
 	});
-	hours = Math.round(hours,1);
+	hours = roundPretty(hours);
 	var fell_asleep_time = $(".fell_asleep input", hoursBlock).val();
 	var woke_up_time =  $(".woke_up input", hoursBlock).val();
 	
@@ -92,6 +109,6 @@ function calculateHours(hoursBlock) {
 	}
 	
 
-	total_hours_awake = fell_asleep_math_time - woke_up_math_time;
+	total_hours_awake = roundPretty(fell_asleep_math_time - woke_up_math_time);
 	$(".total", hoursBlock).html(hours + "/" + total_hours_awake);
 }
