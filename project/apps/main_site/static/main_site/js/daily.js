@@ -107,5 +107,10 @@ function calculateHours(hoursBlock) {
 	
 
 	total_hours_awake = roundPretty(fell_asleep_math_time - woke_up_math_time);
-	$(".total", hoursBlock).html(hours + "/" + total_hours_awake);
+	if (hours == total_hours_awake) {
+		$(".total", hoursBlock).html("");	
+	} else {
+		$(".total", hoursBlock).html(hours + "/" + total_hours_awake);	
+	}
+	
 }
