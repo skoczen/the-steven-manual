@@ -9,6 +9,8 @@ def turn_friendly_time_into_python_time(time_with_ampm):
     hour, minute = time.split(":")
     hour = int(hour)
     minute = int(minute)
+    if hour == 12 and ampm.lower() == "am":
+        hour = 0
     if ampm.lower() == "pm":
         hour += 12
     if hour == 24:
