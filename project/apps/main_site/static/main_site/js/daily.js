@@ -91,12 +91,18 @@ function calculateHours(hoursBlock) {
 	var woke_up_time =  $(".woke_up input", hoursBlock).val();
 	
 	fell_asleep_math_time = parseFloat(fell_asleep_time.substr(0,2)) + (parseInt(fell_asleep_time.substr(3,2))/60)
+	if (Math.floor(fell_asleep_math_time) == 12) {
+		fell_asleep_math_time -= 12;
+	}
 	if (fell_asleep_time.substr(5,2) == "PM") {
 		fell_asleep_math_time += 12;
 	}
 		
 
 	woke_up_math_time = parseFloat(woke_up_time.substr(0,2)) + (parseInt(woke_up_time.substr(3,2))/60)
+	if (Math.floor(woke_up_math_time) == 12) {
+		woke_up_math_time -= 12;
+	}
 	if (woke_up_time.substr(5,2) == "PM") {
 		woke_up_math_time += 12;
 	}
