@@ -77,14 +77,25 @@ class GutterBumper(BaseModel):
         if self.woke_up_at and self.yesterday.fell_asleep_at:
             today_hrs, today_min, _ = ("%s" % self.woke_up_at).split(":")
             yester_hrs, yester_min, _ = ("%s" % self.yesterday.fell_asleep_at).split(":")
+            today_round_length = 1
+
             today = float(today_hrs) + (float(today_min)/60)
             yester = float(yester_hrs) + (float(yester_min)/60)
-            if yester > 12:
+
+            if yester > today:
                 # different date
-                return round((today+24) - yester,1)
+                diff = (today+24) - yester
             else:
                 # same date
-                return round(today - yester,1)
+                diff = today - yester
+            rem = diff % 1
+            round_len = 1
+            if rem % 25:
+                round_len = 2
+            if rem == 0:
+                round_len = 0
+
+            return round(diff, round_len)
         return None
 
     def save(self, *args, **kwargs):

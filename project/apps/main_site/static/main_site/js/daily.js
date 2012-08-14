@@ -69,9 +69,29 @@ function hoursChanged(e) {
 }
 function calculateHours(hoursBlock) {
 	var hours = 0;
-	$("input", hoursBlock).each(function(){
+	$(".day_hours input", hoursBlock).each(function(){
 		hours += parseFloat($(this).val(),10);
 	});
-	hours = Math.round(hours);
-	// $(".total", hoursBlock).html(hours);
+	hours = Math.round(hours,1);
+	var fell_asleep_time = $(".fell_asleep input", hoursBlock).val();
+	var woke_up_time =  $(".woke_up input", hoursBlock).val();
+	
+	fell_asleep_math_time = parseFloat(fell_asleep_time.substr(0,2)) + (parseInt(fell_asleep_time.substr(3,2))/60)
+	if (fell_asleep_time.substr(5,2) == "PM") {
+		fell_asleep_math_time += 12;
+	}
+		
+
+	woke_up_math_time = parseFloat(woke_up_time.substr(0,2)) + (parseInt(woke_up_time.substr(3,2))/60)
+	if (woke_up_time.substr(5,2) == "PM") {
+		woke_up_math_time += 12;
+	}
+
+	if (fell_asleep_math_time < woke_up_math_time) {
+		fell_asleep_math_time += 24;	
+	}
+	
+
+	total_hours_awake = fell_asleep_math_time - woke_up_math_time;
+	$(".total", hoursBlock).html(hours + "/" + total_hours_awake);
 }
