@@ -79,9 +79,6 @@ function roundPretty(num) {
 	if (rem == 0) {
 		roundLen = 0;
 	}
-	console.log(num)
-	console.log(roundLen)
-	console.log(Math.round(num,roundLen))
 	return roundNumberWithDec(num,roundLen)
 }
 function calculateHours(hoursBlock) {

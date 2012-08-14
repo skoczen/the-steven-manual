@@ -44,8 +44,8 @@ form table td, form table  input {
 }
 .hours .total {
 	padding: 7px 0px 4px 0px;
-	font-size: 15px;
-	color: #999;
+	font-size: 12px;
+	color: #EEE;
 }
 .hours .sleep .number {
 	padding: 7px 0px 4px 0px;
