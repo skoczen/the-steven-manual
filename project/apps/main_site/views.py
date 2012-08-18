@@ -25,6 +25,7 @@ def home(request):
 
 @render_to("main_site/monthly.html")
 def monthly(request):
+    gutterbumpers = GutterBumper.objects.filter(date__gte=datetime.date.today()-datetime.timedelta(days=31))
     return locals()
 
 @render_to("main_site/daily.html")
