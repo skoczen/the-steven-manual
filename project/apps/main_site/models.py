@@ -52,6 +52,12 @@ class GutterBumper(BaseModel):
     
     emotions = models.ManyToManyField(Emotion, blank=True, null=True, verbose_name="Top three emotions")
 
+    # ouchmotions?
+    # yaymotions?
+
+    class Meta:
+        ordering = ("date",)
+
     @property
     def saw_friend(self):
         return self.friend_hrs > 0
