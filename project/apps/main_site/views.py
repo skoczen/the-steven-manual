@@ -1,4 +1,5 @@
 import datetime
+import math
 from annoying.decorators import render_to, ajax_request
 from main_site.models import GutterBumper
 from main_site.forms import GutterBumperForm
@@ -27,6 +28,7 @@ def home(request):
 def monthly(request):
     gutterbumpers = GutterBumper.objects.filter(date__gte=datetime.date.today()-datetime.timedelta(days=31))
     total_days = gutterbumpers.count()
+    total_workdays = total_days - math.floor(total_days/7*2)
     total_sleep = 0
     total_work = 0
     total_alone = 0
@@ -47,6 +49,7 @@ def monthly(request):
     avg_friend = total_friend / total_days
     avg_public = total_public / total_days
     avg_relationship = total_relationship / total_days
+    avg_work_per_workday = total_work / total_workdays
     return locals()
 
 @render_to("main_site/daily.html")
