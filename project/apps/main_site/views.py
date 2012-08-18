@@ -26,6 +26,27 @@ def home(request):
 @render_to("main_site/monthly.html")
 def monthly(request):
     gutterbumpers = GutterBumper.objects.filter(date__gte=datetime.date.today()-datetime.timedelta(days=31))
+    total_days = gutterbumpers.count()
+    total_sleep = 0
+    total_work = 0
+    total_alone = 0
+    total_friend = 0
+    total_public = 0
+    total_relationship = 0
+    for g in gutterbumpers:
+        total_sleep += g.sleep_hrs or 0
+        total_work += g.work_hrs or 0
+        total_alone += g.alone_hrs or 0
+        total_friend += g.friend_hrs or 0
+        total_public += g.public_hrs or 0
+        total_relationship += g.relationship_hrs or 0
+
+    avg_sleep = total_sleep / total_days
+    avg_work = total_work / total_days
+    avg_alone = total_alone / total_days
+    avg_friend = total_friend / total_days
+    avg_public = total_public / total_days
+    avg_relationship = total_relationship / total_days
     return locals()
 
 @render_to("main_site/daily.html")
