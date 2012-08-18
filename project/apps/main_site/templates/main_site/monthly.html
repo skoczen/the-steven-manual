@@ -10,6 +10,7 @@
 {% block js %}{{block.super}}
 {% compress js %}
 <script src="{{STATIC_URL}}main_site/js/site.js"></script>
+{% endcompress %}
 <script type="text/javascript">
     var chart;
     var chartData = [
@@ -25,6 +26,10 @@
 		},
 		{% endfor %}
     ];
+ </script>
+ 
+ {% compress js %}
+ <script> 
     var chartCursor;
  	AmCharts.ready(function () {
         // SERIAL CHART
@@ -125,8 +130,6 @@
         // WRITE
         chart.write("chartdiv");
     });
-</script>
-  
 </script>
 {% endcompress %}
 {% endblock %}
