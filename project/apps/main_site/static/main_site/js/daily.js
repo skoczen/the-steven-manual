@@ -124,7 +124,9 @@ function calculateHours(hoursBlock) {
 	if (hours == total_hours_awake) {
 		$(".total", hoursBlock).html("");	
 	} else {
-		$(".total", hoursBlock).html(hours + "/" + total_hours_awake);	
+		var diff = total_hours_awake-hours;
+		diff =  (diff < 0) ? diff : "+" + diff
+		$(".total", hoursBlock).html( diff );	
 	}
 	
 }
