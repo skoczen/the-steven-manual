@@ -79,7 +79,7 @@ form .section.num_beers {
 
 .daily_form {
 	padding: 20px 2%;
-	margin: 20px 1%;
+	margin: 0px 1%;
 	width: 44%;
 	float: left;
 	border: 1px solid #DDD;
@@ -107,4 +107,22 @@ form .section {
 }
 form .sleep_field input {
 	width: 60px;
+}
+.monthly .averages {
+	float: right;
+	width: 20%;
+	text-align: left;
+	margin-top: 100px;
+}
+
+header {
+	padding: 0px;
+	margin: 0px auto;
+	width: 96%;
+}
+header a, header a:visited, header a:hover {
+	display: inline-block;
+	padding: 10px 5px 5px 5px;
+	color: #888;
+	text-decoration: none;
 }

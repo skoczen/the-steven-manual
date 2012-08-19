@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% load compress %}
+
+{% block css %}{{block.super}}
+{% compress css %}
+<link rel="stylesheet" href="{{STATIC_URL}}main_site/css/fonts.css">
+<link rel="stylesheet" href="{{STATIC_URL}}main_site/css/site.css">
+{% endcompress %}
+{% endblock %}
+
+{% block js %}{{block.super}}
+{% compress js %}
+<script src="{{STATIC_URL}}main_site/js/site.js"></script>
+{% endcompress %}
+{% endblock %}
+
+
+{% block header %}
+<a href="{% url main_site:daily %}">Daily</a>
+<a href="{% url main_site:monthly %}">Monthly</a>
+<a href="{% url main_site:emotions %}">Book of Emotions</a>
+<a href="{% url main_site:values %}">Book of Values</a>
+{% endblock %}

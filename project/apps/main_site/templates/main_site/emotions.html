@@ -1,0 +1,7 @@
+{% extends "main_site/base.html" %}{% load compress %}
+
+{% block content %}
+{% for e in emotions %}
+	<a href="{% url main_site:emotion e.slug %}">{{e.name}}</a><br/>
+{% endfor %}
+{% endblock %}

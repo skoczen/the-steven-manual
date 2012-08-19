@@ -12,4 +12,9 @@ urlpatterns = patterns('',
     url(r'^monthly', views.monthly, name='monthly'),
     url(r'^update_bumpers/{bumper_pk:digits}/', views.update_bumpers, name='update_bumpers'),
     url(r'^get_sleep_hrs/{bumper_pk:digits}/', views.get_sleep_hrs, name='get_sleep_hrs'),
+
+    url(r'^emotions', views.emotions, name='emotions'),
+    url(r'^emotion/{emotion_slug:slug}/', views.emotion, name='emotion'),
+    url(r'^values', views.values, name='values'),
+    url(r'^value/{value_slug:slug}/', views.value, name='value'),
 )

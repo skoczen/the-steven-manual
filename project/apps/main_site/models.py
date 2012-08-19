@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 import datetime
 
 BUMPER_STATUS_GOOD = "green"
@@ -20,6 +21,7 @@ class DataSensitivity(BaseModel):
 # Create your models here.
 class Emotion(BaseModel):
     name = models.CharField(max_length=200)
+    slug = models.CharField(max_length=210, blank=True, null=True)
     one_liner = models.TextField(blank=True, null=True)
     cause = models.TextField(blank=True, null=True, verbose_name="Causes")
     symptoms = models.TextField(blank=True, null=True)
@@ -28,10 +30,20 @@ class Emotion(BaseModel):
     class Meta:
         ordering = ("name",)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Emotion,self).save(*args, **kwargs)
+
     
 class Value(BaseModel):
     name = models.CharField(max_length=200, verbose_name='Story name')
+    slug = models.CharField(max_length=210, blank=True, null=True)
     explanation = models.TextField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Emotion,self).save(*args, **kwargs)
+
 
 class GutterBumper(BaseModel):
     date = models.DateField(default=datetime.date.today())

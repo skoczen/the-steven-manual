@@ -1,7 +1,7 @@
 import datetime
 import math
 from annoying.decorators import render_to, ajax_request
-from main_site.models import GutterBumper
+from main_site.models import GutterBumper, Emotion, Value
 from main_site.forms import GutterBumperForm
 
 def turn_friendly_time_into_python_time(time_with_ampm):
@@ -37,6 +37,27 @@ def success_and_statii_for_bumper(success, bumper_pk):
 def home(request):
     return locals()
 
+@render_to("main_site/emotions.html")
+def emotions(request):
+    emotions = Emotion.objects.all()
+    return locals()
+
+
+@render_to("main_site/emotion.html")
+def emotion(request, emotion_slug):
+    emotion = Emotion.objects.get(slug=emotion_slug)
+    return locals()
+
+@render_to("main_site/values.html")
+def values(request):
+    values = Value.objects.all()
+    return locals()
+
+
+@render_to("main_site/value.html")
+def value(request, value_slug):
+    value = Value.objects.get(slug=value_slug)
+    return locals()
 
 @render_to("main_site/monthly.html")
 def monthly(request):
@@ -49,6 +70,10 @@ def monthly(request):
     total_friend = 0
     total_public = 0
     total_relationship = 0
+    total_presence = 0
+    total_happiness = 0
+    total_creativity = 0
+    total_morning_mood = 0
     for g in gutterbumpers:
         total_sleep += g.sleep_hrs or 0
         total_work += g.work_hrs or 0
@@ -56,6 +81,10 @@ def monthly(request):
         total_friend += g.friend_hrs or 0
         total_public += g.public_hrs or 0
         total_relationship += g.relationship_hrs or 0
+        total_presence += g.presence or 0
+        total_happiness += g.happiness or 0
+        total_creativity += g.creativity or 0
+        total_morning_mood += g.morning_mood or 0
 
     avg_sleep = total_sleep / total_days
     avg_work = total_work / total_days
@@ -64,6 +93,10 @@ def monthly(request):
     avg_public = total_public / total_days
     avg_relationship = total_relationship / total_days
     avg_work_per_workday = total_work / total_workdays
+    avg_presence = total_presence / total_days
+    avg_happiness = total_happiness / total_days
+    avg_creativity = total_creativity / total_days
+    avg_morning_mood = total_morning_mood / total_days
     return locals()
 
 @render_to("main_site/daily.html")
