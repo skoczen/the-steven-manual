@@ -99,6 +99,14 @@ def monthly(request):
     avg_morning_mood = total_morning_mood / total_days
     return locals()
 
+
+@render_to("main_site/dashboard.html")
+def dashboard(request):
+    current_bumper = GutterBumper.objects.get_or_create(date=datetime.datetime.today())[0]
+    bumper_statii = success_and_statii_for_bumper(True, current_bumper.pk)
+
+    return locals()
+
 @render_to("main_site/daily.html")
 def daily(request):
     today = datetime.date.today()

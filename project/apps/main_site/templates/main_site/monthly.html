@@ -169,21 +169,25 @@
 
                 // GRAPH
                 var graph = new AmCharts.AmGraph();
+                graph.title = "Presence";
                 graph.valueField = "presence";
                 graph.hideBulletsCount = 50;
                 subjChart.addGraph(graph);
 
                 var graph = new AmCharts.AmGraph();
+                graph.title = "Happiness";
                 graph.valueField = "happiness";
                 graph.hideBulletsCount = 50;
                 subjChart.addGraph(graph);
 
                 var graph = new AmCharts.AmGraph();
+                graph.title = "Creativity";
                 graph.valueField = "creativity";
                 graph.hideBulletsCount = 50;
                 subjChart.addGraph(graph);
 
                 var graph = new AmCharts.AmGraph();
+                graph.title = "Morning mood";
                 graph.valueField = "morning_mood";
                 graph.hideBulletsCount = 50;
                 subjChart.addGraph(graph);
@@ -193,6 +197,12 @@
                 chartCursor.cursorPosition = "mouse";
                 chartCursor.pan = true; // set it to fals if you want the cursor to work in "select" mode
                 subjChart.addChartCursor(chartCursor);
+
+		        // LEGEND
+		        var legend = new AmCharts.AmLegend();
+		        legend.position = "bottom";
+		        subjChart.addLegend(legend);
+
 
                 // // SCROLLBAR
                 // var chartScrollbar = new AmCharts.ChartScrollbar();

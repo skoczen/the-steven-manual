@@ -1,7 +1,9 @@
 {% extends "main_site/base.html" %}{% load compress %}
 
 {% block content %}
+<div class="value">
 <h1>{{value.name}}</h1>
 
-{{value.explanation|safe}}
+<div class="details">{{value.explanation|linebreaksbr|safe}}</div>
+</div>
 {% endblock %}

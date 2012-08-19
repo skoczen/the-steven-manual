@@ -1,7 +1,9 @@
 {% extends "main_site/base.html" %}{% load compress %}
 
 {% block content %}
+<div class="values">
 {% for v in values %}
 	<a href="{% url main_site:value v.slug %}">{{v.name}}</a><br/>
 {% endfor %}
+</div>
 {% endblock %}

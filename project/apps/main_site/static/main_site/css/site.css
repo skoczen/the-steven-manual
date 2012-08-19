@@ -1,3 +1,7 @@
+a, a:visited, a:hover {
+	color: #046688;
+	text-decoration: none;
+}
 body {
 	background-color: #F2F2F2;
 }
@@ -125,4 +129,78 @@ header a, header a:visited, header a:hover {
 	padding: 10px 5px 5px 5px;
 	color: #888;
 	text-decoration: none;
+}
+.emotion, .emotions {
+	width: 94%;
+	margin: 20px auto;
+	color: #444;
+	font-size: 14px;
+}
+.emotion h1, .emotion h2 {
+	font-weight: normal;
+	color: #CCC;
+	margin-top: 1rem;
+}
+.emotion .one_liner {
+	margin: 0.5rem 0px;
+	font-size: 1.2rem;
+	color: #777;
+}
+.emotion .details {
+	padding: 0px 10px;
+}
+.emotion .cause {
+	color: #444;
+}
+.emotion .symptoms {
+	color: #333;
+}
+.emotion .helpful {
+	color: #222;
+}
+.emotions a {
+	font-size: 16px;
+	padding: 4px;
+}
+.value, .values {
+	width: 94%;
+	margin: 20px auto;
+	color: #444;
+	font-size: 14px;
+}
+.value h1, .value h2 {
+	font-weight: normal;
+	color: #CCC;
+	margin-top: 1rem;
+}
+.value .details {
+	padding: 4px 10px;
+}
+.values a {
+	font-size: 16px;
+	padding: 4px;
+}
+
+.dashboard .measurement {
+	float: left;
+}
+.dashboard .graph_label {
+	text-align: center;
+}
+.dashboard .measurement.status_label {
+	display: block;
+	width: 18%;
+	font-size: 2em;
+	padding-top: 50px;
+	height: 100px;
+	margin: 0px 1%;
+}
+/*.dashboard canvas.graph_canvas {
+	width: %;
+	margin: 0px 1%;
+}
+*/
+.dashboard .dashboard_row {
+	display: block;
+	clear: both;
 }

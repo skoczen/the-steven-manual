@@ -1,0 +1,70 @@
+{% extends "main_site/base.html" %}{% load compress %}
+
+{% block js %}{{block.super}}
+{% compress js %}
+<script src="{{STATIC_URL}}main_site/js/dashboard.js"></script>
+{% endcompress %}
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+	<div linked_canvas="presence_trend" class="measurement gauge" value="{{current_bumper.presence_trend|floatformat:1}}">
+		<canvas class="graph_canvas" id="presence_trend"></canvas>
+		<div class="graph_label">presence: {{current_bumper.presence_trend|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="happiness_trend" class="measurement gauge" value="{{current_bumper.happiness_trend|floatformat:1}}">
+		<canvas class="graph_canvas" id="happiness_trend"></canvas>
+		<div class="graph_label">happiness: {{current_bumper.happiness_trend|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="creativity_trend" class="measurement gauge" value="{{current_bumper.creativity_trend|floatformat:1}}">
+		<canvas class="graph_canvas" id="creativity_trend"></canvas>
+		<div class="graph_label">creativity: {{current_bumper.creativity_trend|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="morning_mood_trend" class="measurement gauge" value="{{current_bumper.morning_mood_trend|floatformat:1}}">
+		<canvas class="graph_canvas" id="morning_mood_trend"></canvas>
+		<div class="graph_label">morning_mood: {{current_bumper.morning_mood_trend|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="sleep_health" class="measurement gauge" value="{{current_bumper.sleep_health|floatformat:1}}">
+		<canvas class="graph_canvas" id="sleep_health"></canvas>
+		<div class="graph_label">sleep_health: {{current_bumper.sleep_health|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="work_health" class="measurement gauge" value="{{current_bumper.work_health|floatformat:1}}">
+		<canvas class="graph_canvas" id="work_health"></canvas>
+		<div class="graph_label">work_health: {{current_bumper.work_health|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="alone_health" class="measurement gauge" value="{{current_bumper.alone_health|floatformat:1}}">
+		<canvas class="graph_canvas" id="alone_health"></canvas>
+		<div class="graph_label">alone_health: {{current_bumper.alone_health|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="friend_health" class="measurement gauge" value="{{current_bumper.friend_health|floatformat:1}}">
+		<canvas class="graph_canvas" id="friend_health"></canvas>
+		<div class="graph_label">friend_health: {{current_bumper.friend_health|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="public_health" class="measurement gauge" value="{{current_bumper.public_health|floatformat:1}}">
+		<canvas class="graph_canvas" id="public_health"></canvas>
+		<div class="graph_label">public_health: {{current_bumper.public_health|floatformat:1}}</div>
+	</div>
+	<div linked_canvas="relationship_health" class="measurement gauge" value="{{current_bumper.relationship_health|floatformat:1}}">
+		<canvas class="graph_canvas" id="relationship_health"></canvas>
+		<div class="graph_label">relationship_health: {{current_bumper.relationship_health|floatformat:1}}</div>
+	</div>
+
+	<div class="dashboard_row">
+		<div class="measurement status_label {{current_bumper.meditated_status}}">
+			<div class="graph_label">Meditated</div>
+		</div>
+		<div class="measurement status_label {{current_bumper.off_status}}" >
+			<div class="graph_label">Off</div>
+		</div>
+		<div class="measurement status_label {{current_bumper.worked_out_status}}">
+			<div class="graph_label">Worked out</div>
+		</div>
+		<div class="measurement status_label {{current_bumper.left_the_house_status}}">
+			<div class="graph_label">Left the house</div>
+		</div>
+		<div class="measurement status_label {{current_bumper.nature_time_status}}">
+			<div class="graph_label">Nature time</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

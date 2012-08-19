@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from django.template.defaultfilters import slugify
 import datetime
 
@@ -21,7 +22,7 @@ class DataSensitivity(BaseModel):
 # Create your models here.
 class Emotion(BaseModel):
     name = models.CharField(max_length=200)
-    slug = models.CharField(max_length=210, blank=True, null=True)
+    slug = models.CharField(max_length=210, blank=True, null=True, editable=False)
     one_liner = models.TextField(blank=True, null=True)
     cause = models.TextField(blank=True, null=True, verbose_name="Causes")
     symptoms = models.TextField(blank=True, null=True)
@@ -37,12 +38,12 @@ class Emotion(BaseModel):
     
 class Value(BaseModel):
     name = models.CharField(max_length=200, verbose_name='Story name')
-    slug = models.CharField(max_length=210, blank=True, null=True)
+    slug = models.CharField(max_length=210, blank=True, null=True, editable=False)
     explanation = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Emotion,self).save(*args, **kwargs)
+        super(Value,self).save(*args, **kwargs)
 
 
 class GutterBumper(BaseModel):
@@ -170,6 +171,48 @@ class GutterBumper(BaseModel):
             return BUMPER_STATUS_BORDERLINE
         else:
             return BUMPER_STATUS_BAD
+
+
+    @property
+    def presence_trend(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('presence'))['presence__avg']
+    
+    @property
+    def happiness_trend(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('happiness'))['happiness__avg']
+    
+    @property
+    def creativity_trend(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('creativity'))['creativity__avg']
+    
+    @property
+    def morning_mood_trend(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('morning_mood'))['morning_mood__avg']
+    
+    @property
+    def sleep_health(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('sleep_hrs'))['sleep_hrs__avg']
+    
+    @property
+    def work_health(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('work_hrs'))['work_hrs__avg']
+    
+    @property
+    def alone_health(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('alone_hrs'))['alone_hrs__avg']
+    
+    @property
+    def friend_health(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('friend_hrs'))['friend_hrs__avg']
+    
+    @property
+    def public_health(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('public_hrs'))['public_hrs__avg']
+    
+    @property
+    def relationship_health(self):
+        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('relationship_hrs'))['relationship_hrs__avg']
+
 
     def save(self, *args, **kwargs):
         try:
