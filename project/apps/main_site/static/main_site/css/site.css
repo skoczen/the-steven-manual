@@ -190,10 +190,10 @@ header a, header a:visited, header a:hover {
 .dashboard .measurement.status_label {
 	display: block;
 	width: 18%;
-	font-size: 2em;
-	padding-top: 50px;
-	height: 100px;
-	margin: 0px 1%;
+	font-size: 1.6rem;
+	padding-top: 30px;
+	height: 60px;
+	margin: 20px 1%;
 	text-align: center;
 }
 /*.dashboard canvas.graph_canvas {
@@ -217,4 +217,17 @@ header a, header a:visited, header a:hover {
 .dashboard .measurement.health {
 	margin: 20px 1%;	
 	font-size: 0.6em;
+}
+.dashboard .status_label.red {
+	color: #FFF;
+	background-color: #f31400;
+
+}
+.dashboard .status_label.yellow {
+	color: #9d5e00;
+	background-color: #f3ca00;
+}
+.dashboard .status_label.green {
+	color: #056904;
+	background-color: #0efe0c;
 }
