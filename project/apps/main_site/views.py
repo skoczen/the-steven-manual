@@ -19,6 +19,20 @@ def turn_friendly_time_into_python_time(time_with_ampm):
     timestr = "%02d:%02d:00" % (hour, minute)
     return timestr
 
+
+def success_and_statii_for_bumper(success, bumper_pk):
+    bumper = GutterBumper.objects.get(pk=bumper_pk)
+    return {
+        "success": success, 
+        "sleep_hrs": bumper.sleep_hrs, 
+        "id": bumper_pk,
+        "meditated_status": bumper.meditated_status,
+        "off_status": bumper.off_status,
+        "worked_out_status": bumper.worked_out_status,
+        "left_the_house_status": bumper.left_the_house_status,
+        "nature_time_status": bumper.nature_time_status,
+    }
+
 @render_to("main_site/home.html")
 def home(request):
     return locals()
@@ -82,11 +96,10 @@ def update_bumpers(request, bumper_pk):
         from traceback import print_exc
         print print_exc()
         pass
-    bumper = GutterBumper.objects.get(pk=bumper_pk)
-    return {"success":success, "sleep_hrs": bumper.sleep_hrs, "id": bumper_pk}
+    
+    return success_and_statii_for_bumper(success, bumper_pk)
 
 
 @ajax_request
 def get_sleep_hrs(request, bumper_pk):
-    bumper = GutterBumper.objects.get(pk=bumper_pk)
-    return {"success":True, "sleep_hrs": bumper.sleep_hrs, "id": bumper_pk}
+    return success_and_statii_for_bumper(True, bumper_pk)

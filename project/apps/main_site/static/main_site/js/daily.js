@@ -54,12 +54,20 @@ function updateSleepHours() {
 	$(".section.hours").each(function(){
 		$section = $(this);
 		$.ajax({
-			url: $(".sleep", $section).attr("update_url"),
-			success: function(json){
-				$("#gb_" + json.id + " .sleep .number").html(json.sleep_hrs);
-			}
+			url: $section.parents("form").attr("update_url"),
+			success: updateSectionWithResponse,
 		})
 	})
+}
+
+function updateSectionWithResponse(json, section) {
+	$form = $("#gb_" + json.id);
+	$(".sleep .number", $form).html(json.sleep_hrs);
+	$(".meditated label", $form).removeClass().addClass("status_label " + json.meditated_status)
+	$(".off label", $form).removeClass().addClass("status_label " + json.off_status)
+	$(".worked_out label", $form).removeClass().addClass("status_label " + json.worked_out_status)
+	$(".left_the_house label", $form).removeClass().addClass("status_label " + json.left_the_house_status)
+	$(".nature_time label", $form).removeClass().addClass("status_label " + json.nature_time_status)
 }
 
 function hoursChanged(e) {

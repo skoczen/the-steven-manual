@@ -1,6 +1,9 @@
 from django.db import models
 import datetime
 
+BUMPER_STATUS_GOOD = "green"
+BUMPER_STATUS_BORDERLINE = "yellow"
+BUMPER_STATUS_BAD = "red"
 
 class BaseModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
@@ -21,6 +24,10 @@ class Emotion(BaseModel):
     cause = models.TextField(blank=True, null=True, verbose_name="Causes")
     symptoms = models.TextField(blank=True, null=True)
     helpful = models.TextField(blank=True, null=True)
+
+    class Meta:
+        ordering = ("name",)
+
     
 class Value(BaseModel):
     name = models.CharField(max_length=200, verbose_name='Story name')
@@ -39,11 +46,13 @@ class GutterBumper(BaseModel):
 
     off = models.BooleanField(default=False)
     worked_out = models.BooleanField(default=False)
-    mediated = models.BooleanField(default=False, verbose_name="meditated")
+    meditated = models.BooleanField(default=False, verbose_name="meditated")
     left_the_house = models.BooleanField(default=False)
+    nature_time = models.BooleanField(default=False)
     inbox_zero = models.BooleanField(default=False)
     travelling_or_out_of_routine = models.BooleanField(default=False, verbose_name="Travelling/Nonroutine")
-    number_of_beers = models.IntegerField(blank=True, null=True, verbose_name="# of beers")
+    number_of_sleep_beers = models.IntegerField(blank=True, null=True, verbose_name="# of sleep beers")
+    number_of_fun_beers = models.IntegerField(blank=True, null=True, verbose_name="# of fun beers")
     presence = models.IntegerField(blank=True, null=True, help_text="1-10")
     happiness = models.IntegerField(blank=True, null=True, help_text="1-10")
     creativity = models.IntegerField(blank=True, null=True, help_text="1-10")
@@ -68,7 +77,7 @@ class GutterBumper(BaseModel):
     @property
     def yesterday(self):
         try:
-            return GutterBumper.objects.get(date=self.date - datetime.timedelta(days=1))
+            return GutterBumper.objects.get_or_create(date=self.date - datetime.timedelta(days=1))[0]
         except:
             return None
 
@@ -80,7 +89,7 @@ class GutterBumper(BaseModel):
             return None
     @property
     def calculated_sleep_hrs(self):
-        if self.woke_up_at and self.yesterday.fell_asleep_at:
+        if self.woke_up_at and self.yesterday and self.yesterday.fell_asleep_at:
             today_hrs, today_min, _ = ("%s" % self.woke_up_at).split(":")
             yester_hrs, yester_min, _ = ("%s" % self.yesterday.fell_asleep_at).split(":")
             today_round_length = 1
@@ -103,6 +112,52 @@ class GutterBumper(BaseModel):
 
             return round(diff, round_len)
         return None
+
+    
+    @property
+    def meditated_status(self):
+        if self.meditated:
+            return BUMPER_STATUS_GOOD
+        elif self.yesterday and self.yesterday.meditated:
+            return BUMPER_STATUS_BORDERLINE
+        else:
+            return BUMPER_STATUS_BAD
+    
+    @property
+    def off_status(self):
+        if self.off or (self.yesterday and self.yesterday.off):
+            return BUMPER_STATUS_GOOD
+        elif (self.yesterday and self.yesterday.yesterday and self.yesterday.yesterday.off):
+            return BUMPER_STATUS_BORDERLINE
+        else:
+            return BUMPER_STATUS_BAD
+    
+    @property
+    def worked_out_status(self):
+        if self.worked_out or (self.yesterday and self.yesterday.worked_out):
+            return BUMPER_STATUS_GOOD
+        elif (self.yesterday and self.yesterday.yesterday.worked_out):
+            return BUMPER_STATUS_BORDERLINE
+        else:
+            return BUMPER_STATUS_BAD
+        
+    @property
+    def left_the_house_status(self):
+        if self.left_the_house:
+            return BUMPER_STATUS_GOOD
+        elif self.yesterday and self.yesterday.left_the_house:
+            return BUMPER_STATUS_BORDERLINE
+        else:
+            return BUMPER_STATUS_BAD
+    
+    @property
+    def nature_time_status(self):
+        if GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).count() > 1:
+            return BUMPER_STATUS_GOOD
+        elif GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=14)).count() > 1:
+            return BUMPER_STATUS_BORDERLINE
+        else:
+            return BUMPER_STATUS_BAD
 
     def save(self, *args, **kwargs):
         try:

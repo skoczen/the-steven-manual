@@ -1,4 +1,4 @@
-<form class="daily_form form-horizontal" action="{% url main_site:update_bumpers form.instance.pk %}" method="POST"  id="gb_{{form.instance.pk}}" />
+<form class="daily_form form-horizontal" action="{% url main_site:update_bumpers form.instance.pk %}" method="POST"  id="gb_{{form.instance.pk}}" update_url="{% url main_site:get_sleep_hrs form.instance.pk %}" />
 	{% csrf_token %}
 	<span class="hidden">
 		{{form.id}}
@@ -8,7 +8,7 @@
 	<div class="section hours">
 		<table>
 			<tr>
-				<td class="sleep" update_url="{% url main_site:get_sleep_hrs form.instance.pk %}"><div class="number">{{form.instance.sleep_hrs|default:""}}</div>Sleep</td>
+				<td class="sleep"><div class="number">{{form.instance.sleep_hrs|default:""}}</div>Sleep</td>
 				<td class="sleep_field woke_up">{{form.woke_up_at}}<br>Woke up</td>
 				<td class="day_hours work">{{form.work_hrs}}<br>Work</td>
     			<td class="day_hours alone">{{form.alone_hrs}}<br>Alone</td>
@@ -23,10 +23,31 @@
     <div class="section checkboxes">
     	<table>
 			<tr>
-    			<td class="mediated">{{form.mediated}}<br>Mediated</td>
-    			<td class="off">{{form.off}}<br>Off</td>
-    			<td class="worked_out">{{form.worked_out}}<br>Worked out</td>
-    			<td class="left_the_house">{{form.left_the_house}}<br>Left the house</td>
+    			<td class="meditated">
+    				
+    				{{form.meditated}}
+    				<label class="status_label {{form.instance.meditated_status}}">Meditated</label>
+    			</td>
+    			<td class="off">
+    				
+    				{{form.off}}
+    				<label class="status_label {{form.instance.off_status}}">Off</label>
+    			</td>
+    			<td class="worked_out">
+    				
+    				{{form.worked_out}}
+    				<label class="status_label {{form.instance.worked_out_status}}">Worked out</label>
+    			</td>
+    			<td class="left_the_house">
+    				
+    				{{form.left_the_house}}
+    				<label class="status_label {{form.instance.left_the_house_status}}">Left the house</label>
+    			</td>
+    			<td class="nature_time">
+    				
+    				{{form.nature_time}}
+    				<label class="status_label {{form.instance.nature_time_status}}">Nature time</label>
+    			</td>
     		</tr>
     	</table>
     </div>
@@ -36,7 +57,13 @@
 		{{form.notes}}
 	</div>
     <div class="section num_beers">
-    	<label for="id_number_of_beers">Num beers:</label>{{form.number_of_beers}}
+    
+    	<div class="beer_type">
+    		<label for="id_number_of_fun_beers">Fun beers: {{form.number_of_fun_beers}}</label>
+    	</div>
+    	<div class="beer_type">
+    		<label for="id_number_of_sleep_beers">Sleep: {{form.number_of_sleep_beers}}</label>
+    	</div>
     </div>
     <div class="section subjective">
     	<label for="id_{{form.presence.html_name}}">{{form.presence.label}}</label><input type="range" value="{{form.instance.presence}}" min="1" max="10" id="id_{{form.presence.html_name}}" name="{{form.presence.html_name}}"/>

@@ -1,3 +1,6 @@
+body {
+	background-color: #F2F2F2;
+}
 p {
 	display: inline;
 }
@@ -6,7 +9,6 @@ p {
 	top: 0px;
 	left: 10%;
 	width: 80%;
-
 }
 form table {
 	width: 100%;
@@ -25,8 +27,25 @@ form table td, form table  input {
 	margin: 0px;
 	padding: 0px;
 }
-#id_number_of_beers {
+form .section.num_beers {
+	display: block;
+	overflow: auto;
+	padding: 10px 0px 0px 0px;
+}
+#id_number_of_sleep_beers, #id_number_of_fun_beers {
 	width: 50px;
+}
+.beer_type, .beer_type_label {
+	float: left;
+	text-align: center;
+	padding: 5px;
+}
+.beer_type input {
+	text-align: center;
+}
+.beer_type_label {
+	text-align: right;
+	padding-top: 10px;
 }
 .date.header {
 	width: 100%;
@@ -35,12 +54,36 @@ form table td, form table  input {
 	padding: 10px 0px 20px 0px;
 	color: #777;
 }
+.status_label {
+	padding: 0px;
+	margin: 0px;
+	border-radius: 4px;
+	
+}
+.section.checkboxes:hover .status_label {
+	opacity: 1;
+}
+.status_label.red {
+	color: #FFF;
+	background-color: #D00;
+
+}
+.status_label.yellow {
+	color: #650;
+	background-color: #FFEE88;
+}
+.status_label.green {
+	color: #009944;
+	background-color: #AAFFAA;
+}
+
 .daily_form {
 	padding: 20px 2%;
 	margin: 20px 1%;
 	width: 44%;
 	float: left;
 	border: 1px solid #DDD;
+	background: #FFF;
 }
 .hours .total {
 	padding: 7px 0px 4px 0px;
@@ -54,7 +97,6 @@ form table td, form table  input {
 }
 form .section {
 	padding: 10px 0px;
-	
 }
 .section.notes {
 
