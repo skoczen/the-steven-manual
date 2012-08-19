@@ -61,7 +61,9 @@ def value(request, value_slug):
 
 @render_to("main_site/monthly.html")
 def monthly(request):
-    gutterbumpers = GutterBumper.objects.filter(date__gte=datetime.date.today()-datetime.timedelta(days=31))
+    gutterbumpers = GutterBumper.objects\
+                        .filter(date__gte=datetime.date.today()-datetime.timedelta(days=31))\
+                        .filter(date__lt=datetime.date.today())
     total_days = gutterbumpers.count()
     total_workdays = total_days - math.floor(total_days/7*2)
     total_sleep = 0
