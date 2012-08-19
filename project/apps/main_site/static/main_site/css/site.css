@@ -194,6 +194,7 @@ header a, header a:visited, header a:hover {
 	padding-top: 50px;
 	height: 100px;
 	margin: 0px 1%;
+	text-align: center;
 }
 /*.dashboard canvas.graph_canvas {
 	width: %;
@@ -203,4 +204,17 @@ header a, header a:visited, header a:hover {
 .dashboard .dashboard_row {
 	display: block;
 	clear: both;
+}
+.dashboard .big_number {
+	font-size: 3rem;
+	/*font-weight: bold;*/
+	color: #AAA;
+}
+.dashboard .gauge .label_text {
+	color: #888;
+	font-size: 1.3rem;
+}
+.dashboard .measurement.health {
+	margin: 20px 1%;	
+	font-size: 0.6em;
 }

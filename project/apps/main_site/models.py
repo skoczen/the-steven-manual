@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Avg
+from django.db.models import Avg, Sum
 from django.template.defaultfilters import slugify
 import datetime
 
@@ -191,28 +191,51 @@ class GutterBumper(BaseModel):
     
     @property
     def sleep_health(self):
-        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('sleep_hrs'))['sleep_hrs__avg']
+        avg = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('sleep_hrs'))['sleep_hrs__avg']
+        if avg >= 8:
+            return 10
+        return 10*(avg/8)
     
     @property
     def work_health(self):
-        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('work_hrs'))['work_hrs__avg']
+        avg = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).filter(work_hrs__gt=0).aggregate(Avg('work_hrs'))['work_hrs__avg']
+        # -1 for each 15 min over 8.
+        over = avg-8
+        if over <= 0:
+            return 10
+        else:
+            # 0.5 over = 8
+            # 2.25 over = 1
+            return 10 - (over*4)
+        
     
     @property
     def alone_health(self):
-        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('alone_hrs'))['alone_hrs__avg']
+        avg = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=14)).aggregate(Avg('alone_hrs'))['alone_hrs__avg']
+        if avg >= 3:
+            return 10
+        return 10*(avg/3)
     
     @property
     def friend_health(self):
-        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('friend_hrs'))['friend_hrs__avg']
-    
+        sum_hrs = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=14)).aggregate(Sum('friend_hrs'))['friend_hrs__sum']
+        if sum_hrs > 6:
+            return 10
+        return 10*(sum_hrs/6)
+
     @property
     def public_health(self):
-        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('public_hrs'))['public_hrs__avg']
-    
+        sum_hrs = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Sum('public_hrs'))['public_hrs__sum']
+        if sum_hrs > 6:
+            return 10
+        return 10*(sum_hrs/6)
+
     @property
     def relationship_health(self):
-        return GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('relationship_hrs'))['relationship_hrs__avg']
-
+        avg = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('relationship_hrs'))['relationship_hrs__avg']
+        if avg > 2:
+            return 10
+        return 10*(avg/2)
 
     def save(self, *args, **kwargs):
         try:
