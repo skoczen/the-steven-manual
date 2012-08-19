@@ -111,7 +111,7 @@ def dashboard(request):
 def daily(request):
     today = datetime.date.today()
     yesterday_bumper = GutterBumper.objects.get_or_create(date=today-datetime.timedelta(days=1))[0]
-    yesterday_form = GutterBumperForm(instance=yesterday_bumper)
+    yesterday_form = GutterBumperForm(instance=yesterday_bumper, prefix="yesterday")
 
     today_bumper = GutterBumper.objects.get_or_create(date=today)[0]
     today_form = GutterBumperForm(instance=today_bumper)
@@ -124,10 +124,16 @@ def update_bumpers(request, bumper_pk):
 
     try:
         data = request.POST.copy()
-        data["woke_up_at"] = turn_friendly_time_into_python_time(data["woke_up_at"])
-        data["fell_asleep_at"] = turn_friendly_time_into_python_time(data["fell_asleep_at"])
+        prefix = ""
+        manual_prefix = ""
+
+        if "yesterday-woke_up_at" in data:
+            prefix = "yesterday"
+            manual_prefix = "%s-" % prefix
+        data["%swoke_up_at" % manual_prefix] = turn_friendly_time_into_python_time(data["%swoke_up_at" % manual_prefix])
+        data["%sfell_asleep_at" % manual_prefix] = turn_friendly_time_into_python_time(data["%sfell_asleep_at" % manual_prefix])
         bumper = GutterBumper.objects.get(pk=bumper_pk)
-        form = GutterBumperForm(data, instance=bumper)
+        form = GutterBumperForm(data, instance=bumper, prefix=prefix)
         if form.is_valid():
             form.save()
             success=True

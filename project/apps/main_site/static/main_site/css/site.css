@@ -36,7 +36,7 @@ form .section.num_beers {
 	overflow: auto;
 	padding: 10px 0px 0px 0px;
 }
-#id_number_of_sleep_beers, #id_number_of_fun_beers {
+.num_beers input {
 	width: 50px;
 }
 .beer_type, .beer_type_label {

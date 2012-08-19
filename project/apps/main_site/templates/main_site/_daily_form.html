@@ -1,4 +1,4 @@
-<form class="daily_form form-horizontal" action="{% url main_site:update_bumpers form.instance.pk %}" method="POST"  id="gb_{{form.instance.pk}}" update_url="{% url main_site:get_sleep_hrs form.instance.pk %}" />
+<form class="daily_form form-horizontal" action="{% url main_site:update_bumpers form.instance.pk %}" method="POST"  id="gb_{{form.instance.pk}}" update_url="{% url main_site:get_sleep_hrs form.instance.pk %}" >
 	{% csrf_token %}
 	<span class="hidden">
 		{{form.id}}
@@ -59,10 +59,10 @@
     <div class="section num_beers">
     
     	<div class="beer_type">
-    		<label for="id_number_of_fun_beers">Fun beers: {{form.number_of_fun_beers}}</label>
+    		<label for="id_{{form.number_of_fun_beers.html_name}}">Fun beers: {{form.number_of_fun_beers}}</label>
     	</div>
     	<div class="beer_type">
-    		<label for="id_number_of_sleep_beers">Sleep: {{form.number_of_sleep_beers}}</label>
+    		<label for="id_{{form.number_of_sleep_beers.html_name}}">Sleep: {{form.number_of_sleep_beers}}</label>
     	</div>
     </div>
     <div class="section subjective">
