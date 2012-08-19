@@ -9,7 +9,7 @@
     var chartData = [
 		{% for g in gutterbumpers %}
 		{
-			date: new Date({{g.date|date:"Y, m, d"}}),
+			date: new Date({{g.date|date:"Y, "}} {{g.date.month|add:-1}}, {{g.date.day}}),
 			sleep: {{g.sleep_hrs|default:0}},
 			work: {{g.work_hrs|default:0}},
 			alone: {{g.alone_hrs|default:0}},
