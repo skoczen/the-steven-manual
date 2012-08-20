@@ -61,7 +61,7 @@
 		<canvas class="graph_canvas" id="friend_health"></canvas>
 		<div class="graph_label">
 			<div class="big_number">{{current_bumper.friend_health|floatformat:0}}</div>
-			<div class="label_text">Friend</div>
+			<div class="label_text">Friends</div>
 		</div>
 	</div>
 	<div linked_canvas="public_health" class="measurement gauge health" value="{{current_bumper.public_health|floatformat:1}}">
@@ -84,7 +84,7 @@
 			<div class="label_text">Meditated</div>
 		</div>
 		<div class="measurement status_label {{current_bumper.off_status}}" >
-			<div class="label_text">Off</div>
+			<div class="label_text">{% if request.user.is_authenticated %}Off{% else %}Smiled{% endif %}</div>
 		</div>
 		<div class="measurement status_label {{current_bumper.worked_out_status}}">
 			<div class="label_text">Worked out</div>

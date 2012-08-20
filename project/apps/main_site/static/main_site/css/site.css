@@ -204,6 +204,8 @@ header a, header a:visited, header a:hover {
 .dashboard .dashboard_row {
 	display: block;
 	clear: both;
+	overflow: auto;
+	margin: 0px auto;
 }
 .dashboard .big_number {
 	font-size: 3rem;
