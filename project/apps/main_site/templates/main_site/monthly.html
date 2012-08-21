@@ -38,7 +38,7 @@
         };
         chart.dataProvider = chartData;
         chart.marginTop = 10;
-        chart.marginRight = 30;
+        // chart.marginRight = 30;
         chart.categoryField = "date";
 
         // AXES
@@ -56,6 +56,7 @@
         valueAxis.gridAlpha = 0.07;
         valueAxis.axisColor = "#DADADA";
         valueAxis.title = "Hours";
+        valueAxis.maximum = 30;
         valueAxis.titleBold = false;
         chart.addValueAxis(valueAxis);
 
@@ -163,8 +164,10 @@
 
                 // value                
                 var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.stackType = "regular"; // this line makes the chart "stacked"
                 valueAxis.axisAlpha = 0;
                 valueAxis.dashLength = 1;
+                // valueAxis.maximum = 10;
                 subjChart.addValueAxis(valueAxis);
 
                 // GRAPH
@@ -172,24 +175,28 @@
                 graph.title = "Presence";
                 graph.valueField = "presence";
                 graph.hideBulletsCount = 50;
+                graph.fillAlphas = 0.6;
                 subjChart.addGraph(graph);
 
                 var graph = new AmCharts.AmGraph();
                 graph.title = "Happiness";
                 graph.valueField = "happiness";
                 graph.hideBulletsCount = 50;
+                graph.fillAlphas = 0.6;
                 subjChart.addGraph(graph);
 
                 var graph = new AmCharts.AmGraph();
                 graph.title = "Creativity";
                 graph.valueField = "creativity";
                 graph.hideBulletsCount = 50;
+                graph.fillAlphas = 0.6;
                 subjChart.addGraph(graph);
 
                 var graph = new AmCharts.AmGraph();
                 graph.title = "Morning mood";
                 graph.valueField = "morning_mood";
                 graph.hideBulletsCount = 50;
+                graph.fillAlphas = 0.6;
                 subjChart.addGraph(graph);
 
                 // CURSOR
