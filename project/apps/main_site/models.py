@@ -194,7 +194,13 @@ class GutterBumper(BaseModel):
         avg = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).aggregate(Avg('sleep_hrs'))['sleep_hrs__avg']
         if avg >= 8:
             return 10
-        return 10*(avg/8)
+        # 7 hrs sleep = 8
+        # 6 hrs sleep = 3,4
+        # < 5 hrs sleep = 0
+        adjusted_avg = (avg-5)/3
+        if adjusted_avg < 0:
+            adjusted_avg = 0
+        return 10*(adjusted_avg)
     
     @property
     def work_health(self):
