@@ -37,8 +37,6 @@
             backgroundAlpha: 0.15
         };
         chart.dataProvider = chartData;
-        chart.marginTop = 10;
-        // chart.marginRight = 30;
         chart.categoryField = "date";
 
         // AXES
@@ -147,7 +145,6 @@
                 };
                 subjChart.dataProvider = chartData;
                 subjChart.categoryField = "date";
-                subjChart.marginRight = 0;
                 subjChart.balloon.bulletSize = 5;
 
                 // listen for "dataUpdated" event (fired when chart is rendered) and call zoomChart method when it happens
@@ -167,6 +164,7 @@
                 valueAxis.stackType = "regular"; // this line makes the chart "stacked"
                 valueAxis.axisAlpha = 0;
                 valueAxis.dashLength = 1;
+                valueAxis.title = "Rating"
                 // valueAxis.maximum = 10;
                 subjChart.addValueAxis(valueAxis);
 
