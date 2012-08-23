@@ -1,7 +1,10 @@
+from django.core.urlresolvers import reverse
+from django.conf import settings
 from django.db import models
 from django.db.models import Avg, Sum
 from django.template.defaultfilters import slugify
 import datetime
+from util.singly import SinglyHelper, Singly
 
 BUMPER_STATUS_GOOD = "green"
 BUMPER_STATUS_BORDERLINE = "yellow"
@@ -71,7 +74,9 @@ class GutterBumper(BaseModel):
     creativity = models.IntegerField(blank=True, null=True, help_text="1-10")
     morning_mood = models.IntegerField(blank=True, null=True, help_text="1-10")
     notes = models.TextField(blank=True, null=True)
-    
+    weight = models.FloatField(blank=True, null=True)
+    body_fat_percent = models.FloatField(blank=True, null=True)
+
     emotions = models.ManyToManyField(Emotion, blank=True, null=True, verbose_name="Top three emotions")
 
     # ouchmotions?
@@ -243,6 +248,25 @@ class GutterBumper(BaseModel):
             return 10
         return 10*(avg/2)
 
+    @property
+    def fitbit_data(self):
+        if not hasattr(self,"_fitbit_data"):
+            s = Singly(access_token=settings.SINGLY_ACCESS_TOKEN)
+            # print s.get_authorize_url("fitbit", redirect_uri=reverse("main_site:singly_callback"))
+            # print s.get_access_token("poHmFhypvmIEj-7gtYeKCw")
+            raw_weight = s.make_request("/v0/services/fitbit/weight")
+            raw_fat = s.make_request("/v0/services/fitbit/fat")
+            raw_profile = s.make_request("/v0/services/fitbit/self")
+            print raw_weight
+            print raw_profile
+            # print raw_weight["data"]["weight"]
+            for d in raw_weight:
+                print d
+                print d["data"]["weight"][0]["date"]
+                print d["data"]["weight"][0]["weight"]
+            # self._fitbit_data = 
+        return self._fitbit_data
+
     def save(self, *args, **kwargs):
         try:
             old_fell_asleep_time = GutterBumper.objects.get(pk=self.pk).fell_asleep_at
@@ -251,6 +275,10 @@ class GutterBumper(BaseModel):
         
         if self.calculated_sleep_hrs:
             self.sleep_hrs = self.calculated_sleep_hrs
+
+        # if not self.weight:
+        #     self.weight = self.fitbit_data.weight
+        #     self.body_fat_percent = self.fitbit_data.body_fat_percent
 
         super(GutterBumper, self).save(*args, **kwargs)
         if old_fell_asleep_time and old_fell_asleep_time != self.fell_asleep_at and self.tomorrow:

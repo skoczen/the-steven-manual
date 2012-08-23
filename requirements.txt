@@ -21,14 +21,17 @@ lettuce==0.2.6
 lxml==2.3.5
 mechanize==0.2.5
 nose==1.1.2
+oauth==1.0.1
 prettytable==0.5
 psycopg2==2.4.5
 pycrypto==2.6
 pyflakes==0.4.0
 python-googleanalytics==1.0.2
 pytz==2012d
+requests==0.13.8
 salad==0.4.5
 selenium==2.25.0
+simplejson==2.6.1
 splinter==0.4.7
 ssh==1.7.14
 sure==0.10.4

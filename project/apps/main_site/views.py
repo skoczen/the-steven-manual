@@ -1,8 +1,12 @@
 import datetime
 import math
+from util.singly import SinglyHelper
+from django.http import HttpResponseRedirect
 from annoying.decorators import render_to, ajax_request
+
 from main_site.models import GutterBumper, Emotion, Value
 from main_site.forms import GutterBumperForm
+
 
 def turn_friendly_time_into_python_time(time_with_ampm):
     time = time_with_ampm[:5]
@@ -152,3 +156,12 @@ def update_bumpers(request, bumper_pk):
 @ajax_request
 def get_sleep_hrs(request, bumper_pk):
     return success_and_statii_for_bumper(True, bumper_pk)
+
+def singly_callback(request, service="fitbit"):
+    url = SinglyHelper.get_authorize_url(service)
+    return HttpResponseRedirect(url)
+
+
+def fitbit_callback(request):
+    print request.POST
+    print request

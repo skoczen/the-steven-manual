@@ -13,7 +13,10 @@ dj_database_url
 fabric
 gunicorn
 lxml
+oauth
 psycopg2
+requests
 salad
+simplejson
 south
 versiontools
