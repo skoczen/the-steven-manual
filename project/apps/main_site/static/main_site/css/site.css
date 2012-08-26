@@ -160,7 +160,8 @@ header a, header a:visited, header a:hover {
 }
 .emotions a {
 	font-size: 16px;
-	padding: 4px;
+	display: block;
+	padding: 2px;
 }
 .value, .values {
 	width: 94%;

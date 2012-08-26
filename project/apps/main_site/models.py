@@ -209,7 +209,8 @@ class GutterBumper(BaseModel):
     
     @property
     def work_health(self):
-        avg = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).filter(work_hrs__gt=0).aggregate(Avg('work_hrs'))['work_hrs__avg']
+        sum_hrs = GutterBumper.objects.filter(date__gte=self.date-datetime.timedelta(days=7)).filter(work_hrs__gt=0).aggregate(Sum('work_hrs'))['work_hrs__sum']
+        avg = sum_hrs / 5
         # -1 for each 15 min over 8.
         over = avg-8
         if over <= 0:
