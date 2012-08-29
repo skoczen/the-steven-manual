@@ -107,7 +107,7 @@ class GutterBumper(BaseModel):
             return None
     @property
     def calculated_sleep_hrs(self):
-        if self.woke_up_at and self.yesterday and self.yesterday.fell_asleep_at:
+        if self.woke_up_at and self.yesterday and self.yesterday.fell_asleep_at is not None:
             today_hrs, today_min, _ = ("%s" % self.woke_up_at).split(":")
             yester_hrs, yester_min, _ = ("%s" % self.yesterday.fell_asleep_at).split(":")
             today_round_length = 1
