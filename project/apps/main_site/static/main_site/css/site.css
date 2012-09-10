@@ -224,7 +224,6 @@ header a, header a:visited, header a:hover {
 .dashboard .status_label.red {
 	color: #FFF;
 	background-color: #f31400;
-
 }
 .dashboard .status_label.yellow {
 	color: #9d5e00;
@@ -233,4 +232,71 @@ header a, header a:visited, header a:hover {
 .dashboard .status_label.green {
 	color: #056904;
 	background-color: #0efe0c;
+}
+.dashboard .measurement.status_label {
+	padding-top: 20px;
+}
+.dashboard .status_light.red {
+	color: #FFF;
+	background-color: #f31400;
+	background: -moz-linear-gradient(
+		top,
+		#f31400 0%,
+		#f31400);
+	background: -webkit-gradient(
+		linear, 20% top, 70% bottom, 
+		from(#f31400),
+		to(#f31400));
+}
+.dashboard .status_light.yellow {
+	color: #9d5e00;
+	background-color: #f3ca00;
+	background: -moz-linear-gradient(
+		top,
+		#f3ca00 0%,
+		#f3ca00);
+	background: -webkit-gradient(
+		linear, 20% top, 70% bottom, 
+		from(#f3ca00),
+		to(#f3ca00));
+}
+.dashboard .status_light.green {
+	color: #056904;
+	background-color: #0efe0c;
+	background: -moz-linear-gradient(
+		top,
+		#0efe0c 0%,
+		#00ee00);
+	background: -webkit-gradient(
+		linear, 20% top, 70% bottom, 
+		from(#0efe0c),
+		to(#00ee00));
+}
+.dashboard .status_label .status_light {
+	display: block;
+	margin: 0px auto 10px auto;
+	width: 40px;  
+    height: 40px;  
+    /*box-shadow: inset 0px 1px 0px 0px rgba(250,250,250,0.5),  
+    		            0px 0px 3px 2px rgba(226,0,0,0.5);  */
+    border-radius: 20px;  
+}
+.shift_link {
+	display: block;
+	color: rgba( 200,200,200,0.1);
+	font-size: 300px;
+	top: 150px;
+	position: absolute;
+	-webkit-transform: scale(0.6,1);
+	padding: 0px;
+	margin: 0px -40px;
+	cursor: pointer;
+}
+.shift_link:hover {
+	color: rgba( 200,200,200,0.8);	
+}
+.shift_right_link {
+	right: 0px;
+	margin-right: -20px;
+	text-align: right;
 }

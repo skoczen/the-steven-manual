@@ -12,17 +12,43 @@ $(function(){
 		$ele.focus().blur();
 	});
 	
-	$("input, textarea").change(queueFormSave)
-	$(".hours input").change(hoursChanged)
+	$("input, textarea").live("change",queueFormSave)
+	$(".hours input").live("change",hoursChanged)
 	$('form').ajaxForm({
 		success: saveSuccess,
 	});
 	$(".hours").each(function(){
 		calculateHours($(this));
 	});
-	
-	
+	$(".shift_left_link").live("click", shiftLeft);
+	$(".shift_right_link").live("click", shiftRight);
 });
+
+function shiftLeft() {
+	$("#right_form").html($("#left_form").html());
+	var url = $("#left_form form").attr("prev_day_url");
+	setDailyForm(url, $("#left_form"));
+	return false;
+}
+function shiftRight() {
+	$("#left_form").html($("#right_form").html());
+	var url = $("#right_form form").attr("next_day_url");
+	setDailyForm(url, $("#right_form"));
+	return false;
+}
+function setDailyForm(url, target) {
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "json",
+		success: function(json){
+			$(target).html(json.html);
+			$('form').ajaxForm({
+				success: saveSuccess,
+			});
+		}
+	});
+}
 
 function queueFormSave(e) {
 	// saving...

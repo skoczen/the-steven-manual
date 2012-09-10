@@ -2,6 +2,8 @@ import datetime
 import math
 from util.singly import SinglyHelper
 from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
 from annoying.decorators import render_to, ajax_request
 
 from main_site.models import GutterBumper, Emotion, Value
@@ -113,6 +115,7 @@ def dashboard(request):
 
     return locals()
 
+@csrf_exempt
 @render_to("main_site/daily.html")
 def daily(request):
     today = datetime.date.today()
@@ -122,8 +125,22 @@ def daily(request):
     today_bumper = GutterBumper.objects.get_or_create(date=today)[0]
     today_form = GutterBumperForm(instance=today_bumper)
 
+    prev_day = GutterBumper.objects.get_or_create(date=today-datetime.timedelta(days=2))[0]
+    next_day = GutterBumper.objects.get_or_create(date=today+datetime.timedelta(days=1))[0]
+
     return locals()
 
+@csrf_exempt
+@ajax_request
+def daily_form(request, day_pk):
+    today_bumper = GutterBumper.objects.get(pk=day_pk)
+    prev_day = GutterBumper.objects.get_or_create(date=today_bumper.date-datetime.timedelta(days=1))[0]
+    next_day = GutterBumper.objects.get_or_create(date=today_bumper.date+datetime.timedelta(days=1))[0]
+    form = GutterBumperForm(instance=today_bumper)
+
+    return {'html': render_to_string("main_site/_daily_form.html", locals())}
+
+@csrf_exempt
 @ajax_request
 def update_bumpers(request, bumper_pk):
     success = False

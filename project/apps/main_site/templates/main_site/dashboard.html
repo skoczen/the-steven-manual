@@ -80,19 +80,24 @@
 	</div>
 
 	<div class="dashboard_row">
-		<div class="measurement status_label {{current_bumper.meditated_status}}">
+		<div class="measurement status_label">
+			<div class="status_light {{current_bumper.meditated_status}}"></div>
 			<div class="label_text">Meditated</div>
 		</div>
-		<div class="measurement status_label {{current_bumper.off_status}}" >
+		<div class="measurement status_label" >
+			<div class="status_light current_bumper.off_status}}"></div>
 			<div class="label_text">{% if request.user.is_authenticated %}Off{% else %}Smiled{% endif %}</div>
 		</div>
-		<div class="measurement status_label {{current_bumper.worked_out_status}}">
+		<div class="measurement status_label">
+			<div class="status_light {{current_bumper.worked_out_status}}"></div>
 			<div class="label_text">Worked out</div>
 		</div>
-		<div class="measurement status_label {{current_bumper.left_the_house_status}}">
+		<div class="measurement status_label">
+			<div class="status_light {{current_bumper.left_the_house_status}}"></div>
 			<div class="label_text">Left the house</div>
 		</div>
-		<div class="measurement status_label {{current_bumper.nature_time_status}}">
+		<div class="measurement status_label">
+			<div class="status_light {{current_bumper.nature_time_status}}"></div>
 			<div class="label_text">Nature time</div>
 		</div>
 	</div>

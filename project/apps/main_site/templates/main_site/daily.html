@@ -10,13 +10,18 @@
 
 {% block content %}
 <div id="status"></div>
-
+<div class="shift_link shift_left_link">&lsaquo;</div>
+<div class="shift_link shift_right_link">&rsaquo;</div>
+<div id="left_form">
 {% with yesterday_form as form %}
 	{% include "main_site/_daily_form.html" %}
 {% endwith %}
+</div>
+<div id="right_form">
 {% with today_form as form %}
 	{% include "main_site/_daily_form.html" %}
 {% endwith %}
+</div>
 
 <script id="saving" type="text/html">
 	<div class="alert alert-info">Saving...</div>
