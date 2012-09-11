@@ -308,6 +308,14 @@ header a, header a:visited, header a:hover {
 		width: 99.6%;
 		margin: 0px auto;
 		padding: 10px 0.2%;
-
+	}
+	form table {
+		font-size: 10px;
+	}
+	form table input {
+		width: 30px;
+	}
+	.status_label {
+		font-size: 12px;
 	}
 }
