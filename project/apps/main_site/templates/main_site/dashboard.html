@@ -8,28 +8,28 @@
 
 {% block content %}
 <div class="dashboard">
-	<div linked_canvas="presence_trend" class="measurement gauge" value="{{current_bumper.presence_trend|floatformat:1}}">
+	<div linked_canvas="presence_trend" class="measurement gauge big" value="{{current_bumper.presence_trend|floatformat:1}}">
 		<canvas class="graph_canvas" id="presence_trend"></canvas>
 		<div class="graph_label">
 			<div class="big_number">{{current_bumper.presence_trend|floatformat:0}}</div>
 			<div class="label_text">Presence</div>
 		</div>
 	</div>
-	<div linked_canvas="happiness_trend" class="measurement gauge" value="{{current_bumper.happiness_trend|floatformat:1}}">
+	<div linked_canvas="happiness_trend" class="measurement gauge big" value="{{current_bumper.happiness_trend|floatformat:1}}">
 		<canvas class="graph_canvas" id="happiness_trend"></canvas>
 		<div class="graph_label">
 			<div class="big_number">{{current_bumper.happiness_trend|floatformat:0}}</div>
 			<div class="label_text">Happiness</div>
 		</div>
 	</div>
-	<div linked_canvas="creativity_trend" class="measurement gauge" value="{{current_bumper.creativity_trend|floatformat:1}}">
+	<div linked_canvas="creativity_trend" class="measurement gauge big" value="{{current_bumper.creativity_trend|floatformat:1}}">
 		<canvas class="graph_canvas" id="creativity_trend"></canvas>
 		<div class="graph_label">
 			<div class="big_number">{{current_bumper.creativity_trend|floatformat:0}}</div>
 			<div class="label_text">Creativity</div>
 		</div>
 	</div>
-	<div linked_canvas="morning_mood_trend" class="measurement gauge" value="{{current_bumper.morning_mood_trend|floatformat:1}}">
+	<div linked_canvas="morning_mood_trend" class="measurement gauge big" value="{{current_bumper.morning_mood_trend|floatformat:1}}">
 		<canvas class="graph_canvas" id="morning_mood_trend"></canvas>
 		<div class="graph_label">
 			<div class="big_number">{{current_bumper.morning_mood_trend|floatformat:0}}</div>
@@ -80,24 +80,24 @@
 	</div>
 
 	<div class="dashboard_row">
-		<div class="measurement status_label">
-			<div class="status_light {{current_bumper.meditated_status}}"></div>
+		<div class="measurement status_label {{current_bumper.meditated_status}}">
+			<div class="status_light "></div>
 			<div class="label_text">Meditated</div>
 		</div>
-		<div class="measurement status_label" >
-			<div class="status_light current_bumper.off_status}}"></div>
+		<div class="measurement status_label {{current_bumper.off_status}}" >
+			<div class="status_light "></div>
 			<div class="label_text">{% if request.user.is_authenticated %}Off{% else %}Smiled{% endif %}</div>
 		</div>
-		<div class="measurement status_label">
-			<div class="status_light {{current_bumper.worked_out_status}}"></div>
+		<div class="measurement status_label {{current_bumper.worked_out_status}}">
+			<div class="status_light "></div>
 			<div class="label_text">Worked out</div>
 		</div>
-		<div class="measurement status_label">
-			<div class="status_light {{current_bumper.left_the_house_status}}"></div>
+		<div class="measurement status_label {{current_bumper.left_the_house_status}}">
+			<div class="status_light "></div>
 			<div class="label_text">Left the house</div>
 		</div>
-		<div class="measurement status_label">
-			<div class="status_light {{current_bumper.nature_time_status}}"></div>
+		<div class="measurement status_label {{current_bumper.nature_time_status}}">
+			<div class="status_light "></div>
 			<div class="label_text">Nature time</div>
 		</div>
 	</div>

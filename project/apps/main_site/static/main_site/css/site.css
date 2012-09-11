@@ -125,10 +125,12 @@ header {
 	width: 96%;
 }
 header a, header a:visited, header a:hover {
-	display: inline-block;
-	padding: 10px 5px 5px 5px;
 	color: #888;
 	text-decoration: none;
+}
+header a {
+	display: inline-block;
+	padding: 10px 5px 5px 5px;
 }
 .emotion, .emotions {
 	width: 94%;
@@ -197,11 +199,6 @@ header a, header a:visited, header a:hover {
 	margin: 20px 1%;
 	text-align: center;
 }
-/*.dashboard canvas.graph_canvas {
-	width: %;
-	margin: 0px 1%;
-}
-*/
 .dashboard .dashboard_row {
 	display: block;
 	clear: both;
@@ -236,7 +233,7 @@ header a, header a:visited, header a:hover {
 .dashboard .measurement.status_label {
 	padding-top: 20px;
 }
-.dashboard .status_light.red {
+/*.dashboard .status_light.red {
 	color: #FFF;
 	background-color: #f31400;
 	background: -moz-linear-gradient(
@@ -277,10 +274,10 @@ header a, header a:visited, header a:hover {
 	margin: 0px auto 10px auto;
 	width: 40px;  
     height: 40px;  
-    /*box-shadow: inset 0px 1px 0px 0px rgba(250,250,250,0.5),  
-    		            0px 0px 3px 2px rgba(226,0,0,0.5);  */
+    box-shadow: inset 0px 1px 0px 0px rgba(250,250,250,0.5),  
+    		            0px 0px 3px 2px rgba(226,0,0,0.5);  
     border-radius: 20px;  
-}
+}*/
 .shift_link {
 	display: block;
 	color: rgba( 200,200,200,0.1);
@@ -313,9 +310,48 @@ header a, header a:visited, header a:hover {
 		font-size: 10px;
 	}
 	form table input {
-		width: 30px;
+		width: 20px;
 	}
 	.status_label {
-		font-size: 12px;
+		font-size: 10px;
+	}
+	.date.header {
+		font-size: 20px;
+		padding: 5px 0px 10px 0px;
+	}
+	header {
+		font-size: 11px;
+	}
+	header a {
+		padding: 6px 4px 4px 4px;
+	}
+	.section.notes{
+		float: none;
+		width: 100%;
+	}
+	.section.notes textarea {
+		width: 100%;
+	}
+	.beer_type {
+		/*clear: left;*/
+	}
+	.section.subjective input[type=range] {
+		width: 100%;
+	}
+	#main form {
+		padding: 5px;
+	}
+	.dashboard .label_text {
+		font-size: 0.7rem;
+	}
+	.dashboard .measurement.status_label {
+		padding-top: 11px;
+		height: 26px;
+	}
+	.dashboard .gauge .label_text {
+		font-size: 0.8rem;
+	}
+	.dashboard .big_number {
+		font-size: 1.5rem;
 	}
 }

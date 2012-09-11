@@ -51,6 +51,7 @@ $(function(){
 	});
 	var winWidth = $(window).width();
 	var smallGraphWidth = winWidth/7;
+	var bigMobileGraphWidth = winWidth/4;
 	$(".measurement.gauge.health").each(function(){
 		$ele = $(this);
 		var ratio = smallGraphWidth/ $ele.width();
@@ -59,6 +60,17 @@ $(function(){
 		var canv_height = $("canvas", $ele).height();
 		$("canvas", $ele).css({"width": canv_width*ratio, "height": canv_height*ratio});
 	})
+	if ($(window).width()< 800) {
+		$(".measurement.gauge.big").each(function(){
+			$ele = $(this);
+			var ratio = bigMobileGraphWidth/ $ele.width();
+			$ele.css({'width': bigMobileGraphWidth});
+			var canv_width = $("canvas", $ele).width();
+			var canv_height = $("canvas", $ele).height();
+			$("canvas", $ele).css({"width": canv_width*ratio, "height": canv_height*ratio});
+		});
+	}
+	
 
 
 // presence_trend
