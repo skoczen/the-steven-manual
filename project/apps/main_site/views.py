@@ -169,7 +169,7 @@ def update_bumpers(request, bumper_pk):
     
     return success_and_statii_for_bumper(success, bumper_pk)
 
-
+@csrf_exempt
 @ajax_request
 def get_sleep_hrs(request, bumper_pk):
     return success_and_statii_for_bumper(True, bumper_pk)
