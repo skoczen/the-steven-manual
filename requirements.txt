@@ -29,7 +29,7 @@ pycrypto==2.6
 pyflakes==0.4.0
 python-googleanalytics==1.0.2
 pytz==2012d
-requests==0.13.8
+requests==2.20.0
 salad==0.4.5
 selenium==2.25.0
 simplejson==2.6.1
