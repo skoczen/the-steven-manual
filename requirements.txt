@@ -16,7 +16,7 @@ django-storages==1.1.5
 dj_database_url==0.2.1
 dotcloud.cli==0.4.0
 fuzzywuzzy==0.1
-gunicorn==0.14.6
+gunicorn==19.5.0
 lettuce==0.2.6
 lxml==2.3.5
 mechanize==0.2.5
