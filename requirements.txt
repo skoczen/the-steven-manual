@@ -18,7 +18,7 @@ dotcloud.cli==0.4.0
 fuzzywuzzy==0.1
 gunicorn==0.14.6
 lettuce==0.2.6
-lxml==2.3.5
+lxml==4.6.2
 mechanize==0.2.5
 newrelic==1.5.0.103
 nose==1.1.2
